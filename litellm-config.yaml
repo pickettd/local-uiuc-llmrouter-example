@@ -1,0 +1,23 @@
+model_list:
+  - model_name: local-embeddings
+    litellm_params:
+      model: ollama/mxbai-embed-large
+
+  - model_name: ollama/gemma3:1b
+    litellm_params:
+      model: ollama/gemma3:1b
+
+  - model_name: ollama/qwen3:0.6b
+    litellm_params:
+      model: ollama/qwen3:0.6b
+
+  - model_name: ollama/qwen3-vl:30b-a3b-instruct-q4_K_M
+    litellm_params:
+      model: ollama/qwen3-vl:30b-a3b-instruct-q4_K_M
+
+  - model_name: auto-router
+    litellm_params:
+      model: auto_router/local_router
+      auto_router_config: '{"routes":[{"name":"ollama/gemma3:1b","utterances":["write me a python function","how do I code this","help me write a script","debug this code","explain this programming concept"],"description":"coding tasks","score_threshold":0.5},{"name":"ollama/qwen3-vl:30b-a3b-instruct-q4_K_M","utterances":["analyze this complex problem step by step","prove this mathematical theorem","prove that this number is irrational","give a rigorous proof for this conjecture","what are the philosophical implications of","design a distributed system architecture for","evaluate the tradeoffs between these approaches","derive the formula from first principles"],"description":"complex reasoning and analysis","score_threshold":0.5}]}'
+      auto_router_default_model: ollama/qwen3:0.6b
+      auto_router_embedding_model: local-embeddings
