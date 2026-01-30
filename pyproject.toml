@@ -1,0 +1,14 @@
+[project]
+name = "local-uiuc-llmrouter-example"
+version = "0.1.0"
+description = "Minimal LLMRouter example using Ollama LLMs with KNN routing"
+requires-python = ">=3.10"
+dependencies = [
+    "llmrouter-lib",
+    "torch",
+    "transformers",
+    "scikit-learn",
+    "pyyaml",
+    "pandas",
+    "requests",
+]

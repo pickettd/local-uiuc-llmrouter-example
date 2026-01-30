@@ -1,0 +1,29 @@
+{
+  "gemma3:1b": {
+    "size": "1B",
+    "feature": "Fast and efficient 1-billion parameter model optimized for coding tasks including writing functions, debugging code, explaining programming concepts, and generating scripts",
+    "input_price": 0.0,
+    "output_price": 0.0,
+    "model": "gemma3:1b",
+    "service": "Ollama",
+    "api_endpoint": "http://localhost:11434/v1"
+  },
+  "qwen3:0.6b": {
+    "size": "0.6B",
+    "feature": "Lightweight 0.6-billion parameter model for simple general knowledge questions, casual conversation, quick factual lookups, and basic text tasks",
+    "input_price": 0.0,
+    "output_price": 0.0,
+    "model": "qwen3:0.6b",
+    "service": "Ollama",
+    "api_endpoint": "http://localhost:11434/v1"
+  },
+  "qwen3-vl:30b-a3b-instruct-q4_K_M": {
+    "size": "30B",
+    "feature": "Large 30-billion parameter model for complex reasoning, mathematical proofs, rigorous analysis, system architecture design, philosophical evaluation, and multi-step logical deduction",
+    "input_price": 0.0,
+    "output_price": 0.0,
+    "model": "qwen3-vl:30b-a3b-instruct-q4_K_M",
+    "service": "Ollama",
+    "api_endpoint": "http://localhost:11434/v1"
+  }
+}
