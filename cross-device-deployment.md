@@ -65,6 +65,18 @@ docker run --rm --network host -v /home/pickettd/llmrouter:/app uiuc-router pyth
 
 **Results:** All 3 test queries routed correctly. Longformer embedding takes ~6s/query on Cortex-A57 CPU (49s cold start). KNN classification is ~20-30ms.
 
+### GPU Acceleration on Jetson Nano (Tested 2026-03-17)
+
+Two approaches tested to get GPU-accelerated Longformer embedding:
+
+**`--runtime nvidia` with standard image: Won't work.** The `torch==2.6.0` aarch64 wheel from PyPI is CPU-only (`2.6.0+cpu`). PyTorch's CUDA wheels are only published for x86_64. The NVIDIA runtime correctly mounts GPU devices, but a CPU-only torch can't use them.
+
+**`nvcr.io/nvidia/l4t-ml:r32.7.1-py3`: GPU works, stack too old.** This image has CUDA-enabled PyTorch 1.10 that sees the Tegra X1 GPU (`CUDA 10.2`). But it ships Python 3.6.9 + glibc 2.27 — the UIUC LLMRouter stack needs Python 3.10+ and modern transformers/scikit-learn, which can't run here.
+
+**Possible future path (untested):** Build a custom image combining a newer base (Ubuntu 22.04+) with NVIDIA's Jetson-specific PyTorch wheel from `https://developer.download.nvidia.com/compute/redist/jp/`. Unknowns: wheel ABI compatibility with newer glibc/Python, and whether the Tegra X1's shared 4GB RAM leaves enough GPU memory for Longformer alongside llama.cpp.
+
+**Current recommendation:** The CPU-only Docker approach (6s/query) is functional. GPU acceleration would be a nice-to-have but is blocked by the lack of CUDA-enabled aarch64 PyTorch on PyPI.
+
 ### Files deployed to Jetson
 
 The following were copied to `~/llmrouter/` on the Jetson via scp:
